@@ -111,7 +111,7 @@ namespace Test_Exercise_1
 
 
                 //Get sender and subject of first n mails 
-                int n = 1;
+                int n = 2;
                 var (sender, subject) = GetSenderAndSubject(rows[n - 1]);
 
                 Console.WriteLine($"Email #{n}: Sender='{sender}', Subject='{subject}'");
@@ -186,7 +186,7 @@ namespace Test_Exercise_1
             }
             catch (StaleElementReferenceException)
             {
-                // If the row re-rendered, re-find from the row again
+                // If the row re-rendered, find checkbox from the row again
                 cb = row.FindElement(By.CssSelector("div[role='checkbox'][aria-label='Select a conversation']"));
                 ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", cb);
             }
@@ -197,7 +197,7 @@ namespace Test_Exercise_1
         //Get sender and subject function
         static (string Sender, string Subject) GetSenderAndSubject(IWebElement row)
         {
-            // Sender is first span with a title attribute inside the sender area. More stable than matching CSS classes.
+            // Sender is first span with a title attribute inside the sender area
             var senderSpan = row.FindElement(By.CssSelector("div.ESO13 span[title]"));
             string sender = senderSpan.Text.Trim();
 
